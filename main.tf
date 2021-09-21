@@ -24,9 +24,9 @@ module "Vault" {
   source = "./Vault"
 }
 
-# provider "authentik" {
-#   url   = "https://"
-#   token = "foo-bar"
-#   # Optionally set insecure to ignore TLS Certificates
-#   # insecure = true
-# }
+provider "authentik" {
+  url   = module.Vault.Authentik.URL
+  token = module.Vault.Authentik.Token
+  # Optionally set insecure to ignore TLS Certificates
+  # insecure = true
+}
