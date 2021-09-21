@@ -21,6 +21,6 @@ resource "vault_mount" "Terraform" {
 }
 
 data "vault_generic_secret" "Authentik" {
-  path = "keycloak/BitwardenDB"
+  path = "${vault_mount.Terraform.path}/AUTH"
 }
 
