@@ -30,3 +30,7 @@ provider "authentik" {
   # Optionally set insecure to ignore TLS Certificates
   # insecure = true
 }
+
+module "PomeriumApp" {
+  source = "./Apps/Pomerium"
+}
