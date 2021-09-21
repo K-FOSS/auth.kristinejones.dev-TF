@@ -1,6 +1,14 @@
 terraform {
   required_providers {
     #
+    # Docs: https://registry.terraform.io/providers/goauthentik/authentik/latest/docs
+    #
+    authentik = {
+      source = "goauthentik/authentik"
+      version = "2021.8.4"
+    }
+
+    #
     # Hashicorp Consul
     #
     # Docs: https://registry.terraform.io/providers/hashicorp/consul/latest/docs
@@ -11,3 +19,14 @@ terraform {
     }
   }
 }
+
+module "Vault" {
+  source = "./Vault"
+}
+
+# provider "authentik" {
+#   url   = "https://"
+#   token = "foo-bar"
+#   # Optionally set insecure to ignore TLS Certificates
+#   # insecure = true
+# }
