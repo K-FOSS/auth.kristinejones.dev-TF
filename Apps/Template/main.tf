@@ -33,8 +33,6 @@ data "authentik_flow" "AuthnFlow" {
 resource "authentik_application" "Application" {
   name = "${var.AppName}"
   slug = "${var.AppName}-auth"
-
-  protocol_provider = authentik_provider_oauth2.OID.id
 }
 
 resource "random_uuid" "ClientID" {
@@ -47,8 +45,19 @@ resource "random_password" "ClientSecret" {
 }
 
 resource "authentik_provider_oauth2" "OID" {
-  name               = var.AppName
+  name               = "${var.AppName}"
   client_id          = "${var.AppName}-auth"
   client_secret      = random_password.ClientSecret.result
   authorization_flow = data.authentik_flow.AuthnFlow.id
+}
+
+resource "authentik_policy_expression" "policy" {
+  name       = "example"
+  expression = "return True"
+}
+
+resource "authentik_policy_binding" "Application" {
+  target = authentik_application.name.id
+  policy = authentik_policy_expression.policy.id
+  order  = 0
 }
