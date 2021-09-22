@@ -26,8 +26,8 @@ provider "authentik" {
 }
 
 
-resource "authentik_stage_dummy" "name" {
-  name = "test-stage"
+resource "authentik_stage_authenticator_webauthn" "Passwordless" {
+  name = "webauthn-setup"
 }
 
 resource "authentik_flow" "flow" {
@@ -39,7 +39,7 @@ resource "authentik_flow" "flow" {
 
 resource "authentik_flow_stage_binding" "dummy-flow" {
   target = authentik_flow.flow.uuid
-  stage  = authentik_stage_dummy.name.id
+  stage  = authentik_stage_authenticator_webauthn.Passwordless.id
   order  = 0
 }
 
