@@ -90,7 +90,7 @@ resource "random_password" "VaultPath" {
 
 
 resource "vault_generic_secret" "AppSecrets" {
-  path = "authentik/apps/${var.AppName}/${random_password.VaultPath.result}"
+  path = "${var.VaultPath}/${random_password.VaultPath.result}"
 
   data_json = <<EOT
 {
