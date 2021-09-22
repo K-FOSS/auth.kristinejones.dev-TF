@@ -32,5 +32,7 @@ provider "authentik" {
 }
 
 module "PomeriumApp" {
-  source = "./Apps/Pomerium"
+  source = "./Apps/Template"
+
+  AppName = "PomeriumProxy"
 }
