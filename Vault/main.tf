@@ -38,6 +38,8 @@ locals {
   ONE_DAY = (60 * 60) * 24
 
   ONE_WEEK = ((60 * 60) * 24) * 7
+
+  ONE_MONTH = ((60 * 60) * 24) * 31
 }
 
 resource "vault_mount" "OpenIDRootPKI" {
@@ -50,7 +52,7 @@ resource "vault_mount" "OpenIDRootPKI" {
 
   description = "PKI for the ROOT CA"
   default_lease_ttl_seconds = local.ONE_DAY
-  max_lease_ttl_seconds = local.ONE_WEEK
+  max_lease_ttl_seconds = local.ONE_MONTH
 }
 
 resource "vault_pki_secret_backend_root_cert" "OpenIDRootCA" {
@@ -63,7 +65,7 @@ resource "vault_pki_secret_backend_root_cert" "OpenIDRootCA" {
   type = "internal"
 
   common_name = "Root CA"
-  ttl = local.ONE_WEEK
+  ttl = local.ONE_MONTH
 
   #
   # Formats
@@ -99,8 +101,8 @@ resource "vault_mount" "OpenIDIntPKI" {
   #
   # 
   #
-  default_lease_ttl_seconds = local.ONE_DAY
-  max_lease_ttl_seconds = local.ONE_WEEK
+  default_lease_ttl_seconds = local.ONE_WEEK
+  max_lease_ttl_seconds = local.ONE_MONTH
 }
 
 resource "vault_pki_secret_backend_intermediate_cert_request" "OpenIDIntCA" {
@@ -157,7 +159,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "OpenIDRootSign" {
   #
   # TTL
   #  
-  ttl = local.ONE_WEEK
+  ttl = local.ONE_MONTH
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" { 
@@ -182,7 +184,7 @@ resource "vault_pki_secret_backend_role" "OpenIDAuthPKI" {
   # TTL
   #
   ttl = local.ONE_WEEK
-  max_ttl = local.ONE_WEEK
+  max_ttl = local.ONE_MONTH
 
   #
   # Vault Options: https://www.vaultproject.io/api/secret/pki#key_usage
