@@ -27,13 +27,13 @@ provider "authentik" {
 
 
 resource "authentik_stage_authenticator_webauthn" "Passwordless" {
-  name = "webauthn-core"
+  name = "webauthn-${var.AppName}-core"
 }
 
 resource "authentik_flow" "flow" {
-  name        = "test-flow"
-  title       = "Test flow"
-  slug        = "test-flow"
+  name        = "${var.AppName}-flow"
+  title       = "${var.AppName} flow"
+  slug        = "${var.AppName}-flow"
   designation = "authorization"
 }
 
