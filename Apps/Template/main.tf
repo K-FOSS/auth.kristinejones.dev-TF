@@ -27,7 +27,7 @@ provider "authentik" {
 
 
 resource "authentik_stage_authenticator_webauthn" "Passwordless" {
-  name = "webauthn-setup"
+  name = "webauthn-core"
 }
 
 resource "authentik_flow" "flow" {
