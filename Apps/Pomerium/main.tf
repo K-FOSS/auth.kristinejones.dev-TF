@@ -7,19 +7,20 @@ terraform {
       source = "goauthentik/authentik"
       version = "2021.8.4"
     }
+
+    #
+    # Docs: https://registry.terraform.io/providers/hashicorp/random/latest/docs
+    #
+    random = {
+      source = "hashicorp/random"
+      version = "3.1.0"
+    }
   }
 }
 
 
 data "authentik_flow" "default-authorization-flow" {
   slug = "default-provider-authorization-implicit-consent"
-}
-
-resource "authentik_provider_oauth2" "name" {
-  name               = "example-app"
-  client_id          = "example-app"
-  client_secret      = "test"
-  authorization_flow = data.authentik_flow.default-authorization-flow.id
 }
 
 resource "authentik_policy_expression" "policy" {
@@ -33,7 +34,14 @@ resource "authentik_policy_binding" "app-access" {
   order  = 0
 }
 
-resource "authentik_application" "name" {
-  name = "example-app"
-  slug = "example-app"
+resource "random_uuid" "PomeriumID" {
+}
+
+resource "authentik_application" "Pomerium" {
+  name = "Pomerium"
+  slug = "kjdev-auth"
+
+
+  id = random_uuid.PomeriumID.id
+  uuid = random_uuid.PomeriumID.id
 }
