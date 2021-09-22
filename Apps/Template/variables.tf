@@ -11,6 +11,8 @@ variable "OpenID" {
 
   default = {
     URL = "https://auth.kristianjones.dev"
+
+    RedirectURL = null
   }
 }
 
