@@ -24,15 +24,11 @@ module "Vault" {
   source = "./Vault"
 }
 
-provider "authentik" {
-  url   = module.Vault.Authentik.URL
-  token = module.Vault.Authentik.Token
-  # Optionally set insecure to ignore TLS Certificates
-  # insecure = true
-}
-
 module "PomeriumApp" {
   source = "./Apps/Template"
 
   AppName = "PomeriumProxy"
+
+  url   = module.Vault.Authentik.URL
+  token = module.Vault.Authentik.Token
 }
