@@ -15,3 +15,7 @@ variable "URL" {
 variable "Token" {
   type = string
 }
+
+variable "VaultPath" {
+  type = string
+}
