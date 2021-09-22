@@ -75,6 +75,8 @@ module "PomeriumApp" {
 
   OpenID = {
     URL = "https://auth.kristianjones.dev"
+
+    RedirectURL = null
   }
 }
 
