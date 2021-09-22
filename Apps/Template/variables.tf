@@ -3,7 +3,7 @@ variable "AppName" {
 }
 
 variable "OpenID" {
-  value = object({
+  type = object({
     URL = string
 
     RedirectURL = any
