@@ -161,7 +161,7 @@ resource "vault_pki_secret_backend_root_sign_intermediate" "OpenIDRootSign" {
 }
 
 resource "vault_pki_secret_backend_intermediate_set_signed" "intermediate" { 
-  backend = vault_mount.OpenIDIntCA.path 
+  backend = vault_mount.OpenIDIntPKI.path 
   
   certificate = "${vault_pki_secret_backend_root_sign_intermediate.OpenIDRootSign.certificate}\n${vault_pki_secret_backend_root_cert.OpenIDRootCA.certificate}"
 }
