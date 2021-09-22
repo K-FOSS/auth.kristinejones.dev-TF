@@ -3,6 +3,8 @@ output "Authentik" {
     URL = "https://auth.kristianjones.dev:8443"
 
     Token = data.vault_generic_secret.Authentik.data["TOKEN"]
+
+    VaultPath = "Authentik"
   }
 }
 
