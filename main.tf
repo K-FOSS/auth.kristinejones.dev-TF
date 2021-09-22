@@ -70,5 +70,5 @@ module "PomeriumApp" {
   URL   = module.Vault.Authentik.URL
   Token = module.Vault.Authentik.Token
 
-  VaultPath = module.Vault.VaultPath
+  VaultPath = module.Vault.Authentik.VaultPath
 }
