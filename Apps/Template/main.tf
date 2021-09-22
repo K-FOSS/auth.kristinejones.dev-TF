@@ -18,31 +18,6 @@ terraform {
   }
 }
 
-provider "authentik" {
-  url   = var.URL
-  token = var.Token
-  # Optionally set insecure to ignore TLS Certificates
-  # insecure = true
-}
-
-
-resource "authentik_stage_authenticator_webauthn" "Passwordless" {
-  name = "webauthn-${var.AppName}-core"
-}
-
-resource "authentik_flow" "flow" {
-  name        = "${var.AppName}-flow"
-  title       = "${var.AppName} flow"
-  slug        = "${var.AppName}-flow"
-  designation = "authorization"
-}
-
-resource "authentik_flow_stage_binding" "dummy-flow" {
-  target = authentik_flow.flow.uuid
-  stage  = authentik_stage_authenticator_webauthn.Passwordless.id
-  order  = 0
-}
-
 resource "authentik_application" "Application" {
   name = "${var.AppName}"
   slug = "${var.AppName}-auth"
@@ -59,9 +34,14 @@ resource "random_password" "ClientSecret" {
 
 resource "authentik_provider_oauth2" "OID" {
   name               = "${var.AppName}"
+
+  #
+  # Client Credentials
+  #
   client_id          = "${var.AppName}-auth"
   client_secret      = random_password.ClientSecret.result
-  authorization_flow = authentik_flow.flow.uuid
+
+  authorization_flow = var.AuthorizationFlow.UUID
 }
 
 resource "authentik_policy_expression" "policy" {

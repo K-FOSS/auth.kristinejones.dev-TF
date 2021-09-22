@@ -2,10 +2,8 @@ variable "AppName" {
   type = string
 }
 
-variable "URL" {
-  type = string
-}
-
-variable "Token" {
-  type = string
+variable "AuthorizationFlow" {
+  type = object({
+    UUID = string
+  })
 }

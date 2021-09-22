@@ -24,11 +24,28 @@ module "Vault" {
   source = "./Vault"
 }
 
+provider "authentik" {
+  url   = module.Vault.Authentik.URL
+  token = module.Vault.Authentik.Token
+  # Optionally set insecure to ignore TLS Certificates
+  # insecure = true
+}
+
+#
+# Flows
+#
+module "BasePasswordlessFlow" {
+  source = "./Flows/BasePasswordless"
+}
+
+#
+# Applications
+#
+
 module "PomeriumApp" {
   source = "./Apps/Template"
 
   AppName = "pomeriumproxy"
 
-  URL   = module.Vault.Authentik.URL
-  Token = module.Vault.Authentik.Token
+  AuthorizationFlow = module.BasePasswordlessFlow.Flow
 }
