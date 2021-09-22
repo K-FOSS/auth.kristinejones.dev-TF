@@ -31,7 +31,7 @@ data "authentik_flow" "AuthnFlow" {
 }
 
 resource "authentik_application" "Application" {
-  name = var.AppName
+  name = "${var.AppName}"
   slug = "${var.AppName}-auth"
 
   protocol_provider = authentik_provider_oauth2.OID.id
@@ -48,7 +48,7 @@ resource "random_password" "ClientSecret" {
 
 resource "authentik_provider_oauth2" "OID" {
   name               = var.AppName
-  client_id          = random_uuid.ClientID.result
+  client_id          = "${var.AppName}-auth"
   client_secret      = random_password.ClientSecret.result
   authorization_flow = data.authentik_flow.AuthnFlow.id
 }
