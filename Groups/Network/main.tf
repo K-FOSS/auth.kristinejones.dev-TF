@@ -20,5 +20,5 @@ terraform {
 
 resource "authentik_group" "Network" {
   name         = "network_users"
-  users        = [Users.KJones.id]
+  users        = [var.Users.KJones.id]
 }
