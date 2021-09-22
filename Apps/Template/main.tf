@@ -38,13 +38,6 @@ provider "consul" {
   address = "core0.site1.kristianjones.dev:8500"
 }
 
-provider "authentik" {
-  url   = var.URL
-  token = var.Token
-  # Optionally set insecure to ignore TLS Certificates
-  # insecure = true
-}
-
 resource "authentik_application" "Application" {
   name = "${var.AppName}"
   slug = "${var.AppName}-auth"
@@ -71,6 +64,8 @@ resource "authentik_provider_oauth2" "OID" {
   client_secret      = random_password.ClientSecret.result
 
   authorization_flow = var.AuthorizationFlow.UUID
+
+  jwt_alg = "RS256"
 }
 
 resource "authentik_policy_expression" "policy" {

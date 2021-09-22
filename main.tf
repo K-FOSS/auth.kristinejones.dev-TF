@@ -60,6 +60,10 @@ module "BasePasswordlessFlow" {
 # Applications
 #
 
+#
+# Pomerium
+#
+
 module "PomeriumApp" {
   source = "./Apps/Template"
 
@@ -67,8 +71,17 @@ module "PomeriumApp" {
 
   AuthorizationFlow = module.BasePasswordlessFlow.Flow
 
-  URL   = module.Vault.Authentik.URL
-  Token = module.Vault.Authentik.Token
-
   VaultPath = module.Vault.Authentik.VaultPath
+
+  OpenID = {
+    URL = "https://auth.kristianjones.dev"
+  }
 }
+
+#
+# Hashicorp
+# 
+
+#
+# Hashicorp Vault
+#

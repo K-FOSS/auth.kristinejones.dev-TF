@@ -18,6 +18,11 @@ terraform {
   }
 }
 
+resource "authentik_stage_identification" "UserIdentification" {
+  name           = "person-ident"
+  user_fields    = ["username", "email"]
+}
+
 resource "authentik_stage_authenticator_webauthn" "Passwordless" {
   name = "basewebauthn-passwordless-core"
 }
@@ -29,8 +34,15 @@ resource "authentik_flow" "Flow" {
   designation = "authorization"
 }
 
-resource "authentik_flow_stage_binding" "FlowBinding" {
+resource "authentik_flow_stage_binding" "UserIdentification" {
+  target = authentik_flow.Flow.uuid
+
+  stage  = authentik_stage_identification.UserIdentification.id
+  order  = 0
+}
+
+resource "authentik_flow_stage_binding" "WebAuthnBinding" {
   target = authentik_flow.Flow.uuid
   stage  = authentik_stage_authenticator_webauthn.Passwordless.id
-  order  = 0
+  order  = 10
 }
