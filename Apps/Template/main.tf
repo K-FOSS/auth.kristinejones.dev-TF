@@ -18,6 +18,13 @@ terraform {
   }
 }
 
+provider "authentik" {
+  url   = module.Vault.Authentik.URL
+  token = module.Vault.Authentik.Token
+  # Optionally set insecure to ignore TLS Certificates
+  # insecure = true
+}
+
 resource "authentik_application" "Application" {
   name = "${var.AppName}"
   slug = "${var.AppName}-auth"

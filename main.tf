@@ -48,4 +48,7 @@ module "PomeriumApp" {
   AppName = "pomeriumproxy"
 
   AuthorizationFlow = module.BasePasswordlessFlow.Flow
+
+  URL   = module.Vault.Authentik.URL
+  Token = module.Vault.Authentik.Token
 }

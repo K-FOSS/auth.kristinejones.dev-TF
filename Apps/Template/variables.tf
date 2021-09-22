@@ -7,3 +7,11 @@ variable "AuthorizationFlow" {
     UUID = string
   })
 }
+
+variable "URL" {
+  type = string
+}
+
+variable "Token" {
+  type = string
+}
