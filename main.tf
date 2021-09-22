@@ -27,7 +27,7 @@ module "Vault" {
 module "PomeriumApp" {
   source = "./Apps/Template"
 
-  AppName = "PomeriumProxy"
+  AppName = "pomeriumproxy"
 
   URL   = module.Vault.Authentik.URL
   Token = module.Vault.Authentik.Token
