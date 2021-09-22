@@ -32,6 +32,24 @@ provider "authentik" {
 }
 
 #
+# Users
+# 
+
+module "Users" {
+  source = "./Users"
+}
+
+#
+# Groups
+#
+
+module "NetworkGroup" {
+  source = "./Groups/Network"
+
+  Users = module.Users
+}
+ 
+#
 # Flows
 #
 module "BasePasswordlessFlow" {
