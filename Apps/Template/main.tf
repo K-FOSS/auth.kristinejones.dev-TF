@@ -73,7 +73,7 @@ resource "authentik_provider_oauth2" "OID" {
 
   jwt_alg = "RS256"
 
-  rsa_key = authentik_certificate_key_pair.OpenID.name
+  rsa_key = authentik_certificate_key_pair.OpenID.id
 }
 
 resource "authentik_policy_expression" "policy" {
