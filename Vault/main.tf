@@ -205,7 +205,7 @@ resource "vault_pki_secret_backend_cert" "OpenIDCert" {
   ]
 
   backend = vault_mount.OpenIDIntPKI.path
-  name = vault_pki_secret_backend_role.OpenIDIntPKI.name
+  name = vault_pki_secret_backend_role.OpenIDAuthPKI.name
 
   common_name = "auth.kristianjones.dev"
 }
