@@ -183,8 +183,8 @@ resource "vault_pki_secret_backend_role" "OpenIDAuthPKI" {
   #
   # TTL
   #
-  ttl = local.ONE_WEEK
-  max_ttl = local.ONE_WEEK
+  ttl = local.ONE_DAY
+  max_ttl = local.ONE_DAY
 
   #
   # Vault Options: https://www.vaultproject.io/api/secret/pki#key_usage
