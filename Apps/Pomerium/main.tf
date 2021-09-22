@@ -42,6 +42,6 @@ resource "authentik_application" "Pomerium" {
   slug = "kjdev-auth"
 
 
-  id = random_uuid.PomeriumID.id
-  uuid = random_uuid.PomeriumID.id
+  id = "${random_uuid.PomeriumID.result}"
+  uuid = "${random_uuid.PomeriumID.result}"
 }
