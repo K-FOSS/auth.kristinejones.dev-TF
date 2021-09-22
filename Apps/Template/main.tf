@@ -61,7 +61,7 @@ resource "authentik_provider_oauth2" "OID" {
   name               = "${var.AppName}"
   client_id          = "${var.AppName}-auth"
   client_secret      = random_password.ClientSecret.result
-  authorization_flow = authentik_flow.flow.id
+  authorization_flow = authentik_flow.flow.uuid
 }
 
 resource "authentik_policy_expression" "policy" {
@@ -70,7 +70,7 @@ resource "authentik_policy_expression" "policy" {
 }
 
 resource "authentik_policy_binding" "Application" {
-  target = authentik_application.Application.id
+  target = authentik_application.Application.uuid
   policy = authentik_policy_expression.policy.id
   order  = 0
 }
