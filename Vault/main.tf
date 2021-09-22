@@ -201,7 +201,7 @@ resource "vault_pki_secret_backend_role" "OpenIDAuthPKI" {
 
 resource "vault_pki_secret_backend_cert" "OpenIDCert" {
   depends_on = [
-    vault_pki_secret_backend_role.OpenIDIntPKI
+    vault_pki_secret_backend_role.OpenIDAuthPKI
   ]
 
   backend = vault_mount.OpenIDIntPKI.path
