@@ -54,6 +54,12 @@ resource "random_password" "ClientSecret" {
   override_special = "_%@"
 }
 
+resource "authentik_certificate_key_pair" "OpenID" {
+  name             = "VaultPKIOID"
+  certificate_data = var.Certificate.Certificate
+  key_data         = var.Certificate.PrivateKey
+}
+
 resource "authentik_provider_oauth2" "OID" {
   name               = "${var.AppName}"
 
@@ -66,6 +72,8 @@ resource "authentik_provider_oauth2" "OID" {
   authorization_flow = var.AuthorizationFlow.UUID
 
   jwt_alg = "RS256"
+
+  rsa_key = authentik_certificate_key_pair.OpenID.name
 }
 
 resource "authentik_policy_expression" "policy" {
