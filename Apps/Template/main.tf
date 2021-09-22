@@ -19,8 +19,8 @@ terraform {
 }
 
 provider "authentik" {
-  url   = module.Vault.Authentik.URL
-  token = module.Vault.Authentik.Token
+  url   = var.URL
+  token = var.Token
   # Optionally set insecure to ignore TLS Certificates
   # insecure = true
 }
