@@ -26,8 +26,21 @@ provider "authentik" {
 }
 
 
-data "authentik_flow" "AuthnFlow" {
-  slug = "default-provider-authorization-implicit-consent"
+resource "authentik_stage_dummy" "name" {
+  name = "test-stage"
+}
+
+resource "authentik_flow" "flow" {
+  name        = "test-flow"
+  title       = "Test flow"
+  slug        = "test-flow"
+  designation = "authorization"
+}
+
+resource "authentik_flow_stage_binding" "dummy-flow" {
+  target = authentik_flow.flow.uuid
+  stage  = authentik_stage_dummy.name.id
+  order  = 0
 }
 
 resource "authentik_application" "Application" {
@@ -48,7 +61,7 @@ resource "authentik_provider_oauth2" "OID" {
   name               = "${var.AppName}"
   client_id          = "${var.AppName}-auth"
   client_secret      = random_password.ClientSecret.result
-  authorization_flow = data.authentik_flow.AuthnFlow.id
+  authorization_flow = authentik_flow.flow.id
 }
 
 resource "authentik_policy_expression" "policy" {
