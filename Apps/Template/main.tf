@@ -27,7 +27,7 @@ provider "authentik" {
 
 
 data "authentik_flow" "AuthnFlow" {
-  slug = "default-authenticator-webauthn-setup"
+  slug = "default-provider-authorization-implicit-consent"
 }
 
 resource "authentik_application" "Application" {
