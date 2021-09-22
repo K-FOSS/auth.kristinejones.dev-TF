@@ -48,6 +48,8 @@ provider "authentik" {
 resource "authentik_application" "Application" {
   name = "${var.AppName}"
   slug = "${var.AppName}-auth"
+
+  protocol_provider = authentik_provider_oauth2.OID.id
 }
 
 resource "random_uuid" "ClientID" {
