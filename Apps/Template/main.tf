@@ -25,6 +25,11 @@ provider "authentik" {
   # insecure = true
 }
 
+
+data "authentik_flow" "AuthnFlow" {
+  slug = "default-authenticator-webauthn-setup"
+}
+
 resource "authentik_application" "Application" {
   name = var.AppName
   slug = "${var.AppName}-auth"
@@ -45,4 +50,5 @@ resource "authentik_provider_oauth2" "OID" {
   name               = var.AppName
   client_id          = random_uuid.ClientID.result
   client_secret      = random_password.ClientSecret.result
+  authorization_flow = data.authentik_flow.AuthnFlow.id
 }
