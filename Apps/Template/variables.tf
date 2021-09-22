@@ -25,3 +25,13 @@ variable "AuthorizationFlow" {
 variable "VaultPath" {
   type = string
 }
+
+variable "Certificate" {
+  type = object({
+    Certificate = string
+
+    PrivateKey = string
+  })
+
+  sensitive = true
+}

@@ -198,3 +198,14 @@ resource "vault_pki_secret_backend_role" "OpenIDAuthPKI" {
   ##
   ext_key_usage = ["ServerAuth"]
 }
+
+resource "vault_pki_secret_backend_cert" "OpenIDCert" {
+  depends_on = [
+    vault_pki_secret_backend_role.OpenIDIntPKI
+  ]
+
+  backend = vault_mount.OpenIDIntPKI.path
+  name = vault_pki_secret_backend_role.OpenIDIntPKI.name
+
+  common_name = "auth.kristianjones.dev"
+}

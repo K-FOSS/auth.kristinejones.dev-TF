@@ -78,6 +78,11 @@ module "PomeriumApp" {
 
     RedirectURL = null
   }
+
+  Certificate = {
+    Certificate = module.Vault.Authentik.TLSCertificate
+    PrivateKey = module.Vault.Authentik.TLSKey
+  }
 }
 
 #
