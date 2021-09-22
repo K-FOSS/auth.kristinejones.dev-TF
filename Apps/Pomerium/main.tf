@@ -41,3 +41,16 @@ resource "authentik_application" "Pomerium" {
   name = "Pomerium"
   slug = "kjdev-auth"
 }
+
+resource "random_password" "ClientSecret" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+
+resource "authentik_provider_oauth2" "PomeriumOID" {
+  name               = "Pomerium"
+  client_id          = "Pomerium"
+  client_secret      = random_password.ClientSecret.result
+  authorization_flow = data.authentik_flow.default-authorization-flow.id
+}
