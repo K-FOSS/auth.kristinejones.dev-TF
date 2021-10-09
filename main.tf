@@ -74,9 +74,30 @@ module "PomeriumApp" {
   VaultPath = module.Vault.Authentik.VaultPath
 
   OpenID = {
-    URL = "https://auth.kristianjones.dev"
+    URL = "https://auth.int.site1.kristianjones.dev"
 
-    RedirectURL = null
+    RedirectURL = "auth.int.site1aa.kristianjones.dev/oauth2/callback"
+  }
+
+  Certificate = {
+    Certificate = module.Vault.Authentik.TLSCertificate
+    PrivateKey = module.Vault.Authentik.TLSKey
+  }
+}
+
+module "eJabberDApp" {
+  source = "./Apps/Template"
+
+  AppName = "ejabberd"
+
+  AuthorizationFlow = module.BasePasswordlessFlow.Flow
+
+  VaultPath = module.Vault.Authentik.VaultPath
+
+  OpenID = {
+    URL = "https://mq.kristianjones.dev"
+
+    RedirectURL = "https://mq.kristianjones.dev"
   }
 
   Certificate = {
